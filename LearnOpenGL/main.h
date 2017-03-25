@@ -9,7 +9,7 @@
 
 ///global variables
 const GLuint WIDTH = 1200;
-const GLuint HEIGHT = 400;
+const GLuint HEIGHT = 800;
 
  GLfloat FOV = 50.0f;
 

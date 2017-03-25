@@ -8,8 +8,8 @@
 #include "Camera.h"
 
 ///global variables
-const GLuint WIDTH = 1800;
-const GLuint HEIGHT = 900;
+const GLuint WIDTH = 1200;
+const GLuint HEIGHT = 600;
 
  GLfloat FOV = 50.0f;
 

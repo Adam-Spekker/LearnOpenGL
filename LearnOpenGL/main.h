@@ -3,13 +3,11 @@
 #include "Shader.h"
 #include "Frame.h"
 #include "Surface.h"
-
-
 #include "Camera.h"
 
 ///global variables
-const GLuint WIDTH = 1200;
-const GLuint HEIGHT = 800;
+const GLuint WIDTH = 800;
+const GLuint HEIGHT = 600;
 
  GLfloat FOV = 50.0f;
 

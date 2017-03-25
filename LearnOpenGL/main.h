@@ -6,10 +6,10 @@
 #include "Camera.h"
 
 ///global variables
-const GLuint WIDTH = 800;
-const GLuint HEIGHT = 600;
+const GLuint WIDTH = 1600;
+const GLuint HEIGHT = 900;
 
- GLfloat FOV = 50.0f;
+ GLfloat FOV = 45.0f;
 
  bool keys[1024];
  bool firstMouse = true;

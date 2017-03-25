@@ -1,4 +1,7 @@
+#define GLM_FORCE_RADIANS
+
 #include "main.h"
+
 
   GLfloat deltaTime = 0.0f;   // time between lat frame and current frame
   GLfloat lastFrame = 0.0f;   // time of last frame;
@@ -145,7 +148,7 @@ int main() {
                 
                 view  = cam.GetViewMatrix();  
 		projection = glm::perspective(glm::radians(FOV) , 
-                       GLfloat(WIDTH / HEIGHT), 0.1f, 100.0f);
+                       GLfloat(WIDTH) / GLfloat(HEIGHT), 0.1f, 100.0f);
                 
                 ///Transformation matrices
 		GLuint modelLoc = glGetUniformLocation(lightingShader.Program, 
@@ -469,6 +472,8 @@ GLFWwindow* setGL(GLuint width, GLuint height) {
 	///viewport INIT
 	int fBuffWidth, fBuffHeight;
 	glfwGetFramebufferSize(window, &fBuffWidth, &fBuffHeight);
+
+	
 	
 	glfwSetWindowShouldClose(window, GL_FALSE);
 	return window;

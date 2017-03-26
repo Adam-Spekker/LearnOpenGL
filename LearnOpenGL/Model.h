@@ -15,13 +15,32 @@
 #define MODEL_H
 
 #include "top_header.h"
+#include "Shader.h"
+#include "Mesh.h"
 
 class Model {
 public:
-    Model();
+	Model(GLchar* path) {
+		this->loadModel(path);
+	}
+
     Model(const Model& orig);
+
+	void Draw(Shader shader);
+
+
     virtual ~Model();
+
 private:
+	///Data
+	vector<Mesh> meshes;
+	string directory;
+	
+	///Inner Functions
+	void loadModel(std::string path);
+	void processNode(aiNode* node, const aiScene* scene);
+	Mesh processMesh(aiMesh* mesh, const aiScene* scene);
+	vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTexture type, string typeName);
 
 };
 

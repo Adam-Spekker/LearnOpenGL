@@ -33,11 +33,10 @@ struct Vertex {
 struct Texture {
     GLuint id; 
     TexType type;
+    aiString path;
     
-    static const char* typetxt[];
+    static const GLchar* const typetxt[];
 };
-const char* Texture::typetxt[] = {"texture_diffuse", "texture_specular"};
-
 
 class Mesh {
 public:

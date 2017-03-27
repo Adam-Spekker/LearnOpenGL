@@ -18,6 +18,8 @@
 #include "Shader.h"
 #include "Mesh.h"
 
+GLint TextureFromFile(const char* path, string directory);
+
 class Model {
 public:
 	Model(GLchar* path) {
@@ -35,12 +37,13 @@ private:
 	///Data
 	vector<Mesh> meshes;
 	string directory;
+        vector<Texture> textures_loaded;
 	
 	///Inner Functions
 	void loadModel(std::string path);
 	void processNode(aiNode* node, const aiScene* scene);
 	Mesh processMesh(aiMesh* mesh, const aiScene* scene);
-	vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTexture type, string typeName);
+	vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, TexType typeName);
 
 };
 

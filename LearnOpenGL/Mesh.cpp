@@ -12,6 +12,7 @@
  */
 
 #include "Mesh.h"
+const GLchar* const Texture::typetxt[] = {"texture_diffuse", "texture_specular"};
 
 
 

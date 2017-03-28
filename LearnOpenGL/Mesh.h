@@ -46,11 +46,10 @@ public:
     vector<Texture> textures;
     
     ///public functions   
-    Mesh(vector<Vertex> vertices, vector<GLuint> indices,
-        vector<Texture> textures);
+    Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures);
     void Draw(Shader shader);
     
-    Mesh(const Mesh& orig);
+    //Mesh(const Mesh& orig);
     virtual ~Mesh();
 private:
     

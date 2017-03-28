@@ -16,18 +16,21 @@ const GLchar* const Texture::typetxt[] = {"texture_diffuse", "texture_specular"}
 
 
 
-Mesh::Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures) 
-          : vertices(vertices), indices(indices), textures(textures) {
+Mesh::Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures) {
+    this->vertices = vertices;
+    this->indices = indices;
+    this->textures = textures;
+    //std::cout << textures.size() << this->textures.size() << "!";
     this->setupMesh();     
 }
 
-Mesh::Mesh(const Mesh& orig) {
-}
+
 
 Mesh::~Mesh() {
 }
 
 void Mesh::setupMesh() {
+    
     glGenVertexArrays(1, &this->VAO);
     glGenBuffers(1, &this->VBO);
     glGenBuffers(1, &this->EBO);
@@ -58,9 +61,15 @@ void Mesh::setupMesh() {
 }
 
 void Mesh::Draw(Shader shader) {
+    
     GLuint diffuseNr = 1;
     GLuint specularNr = 1;
+    
+    //std::cout << this->textures.size() << std::endl;
+    
     for (GLuint i = 0; i < this->textures.size(); i++) {
+    //    std::cout<<"mesh.draw "<< i << std::endl;
+        
         glActiveTexture(GL_TEXTURE0 + i); ///activating textures 1by1
         
         std::stringstream ss;

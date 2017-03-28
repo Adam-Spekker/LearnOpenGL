@@ -23,11 +23,14 @@ Model::~Model() {
 void Model::Draw(Shader shader) {
 	for (GLint i = 0; i < this->meshes.size(); i++) {
 		this->meshes[i].Draw(shader);
+              //  std::cout<< meshes[i].textures.size() << std::endl;
+                
 	}
 }
 
 void Model::loadModel(string path) {
 	Assimp::Importer import;
+
 	const aiScene* scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
@@ -43,8 +46,14 @@ void Model::loadModel(string path) {
 void Model::processNode(aiNode* node, const aiScene* scene) {
 	///Processing node meshes
 	for (GLuint i = 0; i < node->mNumMeshes; i++) {
+            //std::cout << node->mNumMeshes << std::endl;
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-		this->meshes.push_back(this->processMesh(mesh, scene));
+                
+                Mesh mesha(this->processMesh(mesh, scene));
+               std::cout << mesha.textures[0].id << std::endl;
+		this->meshes.push_back(mesha);
+               // std::cout << this->meshes[i].textures[0].id << std::endl;
+               
 	}
 	///Processing for children
 	for (GLuint i = 0; i < node->mNumChildren; i++) {
@@ -56,9 +65,10 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene) {
 	vector<Vertex> vertices;
 	vector<GLuint> indices;
 	vector<Texture> textures;
-
+        
 	for (GLuint i = 0; i < mesh->mNumVertices; i++) {
-		Vertex vertex;
+		
+                Vertex vertex;
 		glm::vec3 vector;
 		vector.x = mesh->mVertices[i].x;
 		vector.y = mesh->mVertices[i].y;
@@ -92,25 +102,32 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene) {
         
         if (mesh->mMaterialIndex >= 0) {
             aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+           // std::cout<<"\ndiff:";
             vector<Texture> diffuseMaps = this->loadMaterialTextures(material,
                                       aiTextureType_DIFFUSE, DIFFUSE);
             textures.insert(textures.end(), 
                     diffuseMaps.begin(), diffuseMaps.end());
-            
+           //std::cout<<"\nspec:"; 
             vector<Texture> specularMaps = this->loadMaterialTextures(material,
                                       aiTextureType_SPECULAR, SPECULAR);
             textures.insert(textures.end(),
-                    diffuseMaps.begin(), diffuseMaps.end());
+                    specularMaps.begin(), specularMaps.end());
             
+           //std::cout<<textures.size()<<std::endl;  
         }
-
+        //std::cout << textures[0].id << "!";
         
+        
+        return Mesh(vertices, indices, textures);
 }
 
 vector<Texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type,
                                                         TexType typeName) {
     vector<Texture> textures;
+    
+    
     for(GLuint i = 0; i < mat->GetTextureCount(type); i++) {
+        //std::cout<< i <<" ";
         aiString str;
         mat->GetTexture(type, i, &str);
         GLboolean skip = false;
@@ -131,7 +148,7 @@ vector<Texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type,
             this->textures_loaded.push_back(texture);
         }
     }
-    
+    return textures;
 }
 
 

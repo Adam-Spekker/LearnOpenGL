@@ -124,8 +124,14 @@ int main() {
         boxSurface.setup(4, "./resources/blank_specular.png");
         
         Model nano("./resources/nano/nanosuit.obj");
+        Model maya("./resources/maya/maya.obj");
+        Model mask("./resources/mask/VMask.obj");
+        Model st("./resources/st/Stormtrooper.obj");
+        
+       // std::cout <<"tina";
+       // Model tina("./resources/tina/tina.obj");
 
-	Shader lightingShader("./resources/Shader.vs", "./resources/Shader.frag");
+	Shader lightingShader("./resources/VShader.vs", "./resources/targetShader.frag");
         
         Shader lampShader("./resources/VShader.vs", "./resources/lampShader.frag");
         
@@ -133,6 +139,7 @@ int main() {
 	///main loop
 	while(!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
+                pointLightPositions[0] =  glm::vec3(lightPos.x, lightPos.y, lightPos.z);
 		
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -174,109 +181,110 @@ int main() {
                 
 ////////                
 ////////                ///Material             
-////////                GLint matShineLoc = glGetUniformLocation(lightingShader.Program, 
-////////                        "material.shine");             
-////////                glUniform1f(matShineLoc, 32.0f);
+                GLint matShineLoc = glGetUniformLocation(lightingShader.Program, 
+                        "material.shine");             
+                glUniform1f(matShineLoc, 32.0f);
 ////////                
-////////                
-////////                ///Dir light
-////////                GLuint dirLightDirLoc = glGetUniformLocation(lightingShader.Program,
-////////                        "dirLight.direction");
-////////                glUniform3f(dirLightDirLoc, 3.0f, -3.0f, -4.0f);
-////////
-////////                
-////////                GLint dirLightAmbientLoc = glGetUniformLocation(lightingShader.Program,
-////////                        "dirLight.ambient");
-////////                GLint dirLightDiffuseLoc = glGetUniformLocation(lightingShader.Program,
-////////                        "dirLight.diffuse");
-////////                GLint dirLightSpecularLoc = glGetUniformLocation(lightingShader.Program,
-////////                        "dirLight.specular");        
-////////                glUniform3f(dirLightAmbientLoc, 0.06f, 0.06f, 0.06f);
-////////                glUniform3f(dirLightDiffuseLoc, 0.4f, 0.4f, 0.4f);
-////////                glUniform3f(dirLightSpecularLoc, 1.0f, 1.0f, 1.0f);       
-////////                       
-////////                
-////////                
-////////                
-////////                ///Point Lights
-////////           
-////////                int n = 4; /// making dynamic class later 
-////////                GLuint pointLightPosLoc[4]; 
-////////                GLint pointLightAmbientLoc[4];
-////////                GLint pointLightDiffuseLoc[4];
-////////                GLint pointLightSpecularLoc[4];
-////////                
-////////                GLchar uniName[30];
-////////                
-////////                for (int i = 0; i < n; i++) {                   
-////////                    sprintf(uniName,"pointLights[%d]", i); 
-////////                    std::string str = std::string(uniName) + ".position";
-////////                    
-////////                    pointLightPosLoc[i] = glGetUniformLocation(lightingShader.Program,
-////////                            str.c_str());
-////////                    glUniform3f(pointLightPosLoc[i], 
-////////                                pointLightPositions[i].x, 
-////////                                pointLightPositions[i].y,
-////////                                pointLightPositions[i].z);
-////////
-////////                    //std::cout << str.c_str() << " 1\n";
-////////                    
-////////                    str = std::string(uniName) + ".constant";
-////////                    glUniform1f(glGetUniformLocation(lightingShader.Program, 
-////////                            str.c_str()), 1.0f);
-////////                    str = std::string(uniName) + ".linear";
-////////                    glUniform1f(glGetUniformLocation(lightingShader.Program, 
-////////                            str.c_str()), 0.09f);
-////////                    str = std::string(uniName) + ".quadratic";
-////////                    glUniform1f(glGetUniformLocation(lightingShader.Program, 
-////////                            str.c_str()), 0.032f);
-////////                    
-////////                    str = std::string(uniName) + ".ambient";
-////////                    pointLightAmbientLoc[i] = glGetUniformLocation(lightingShader.Program,
-////////                            str.c_str());
-////////                    str = std::string(uniName) + ".diffuse";
-////////                    pointLightDiffuseLoc[i] = glGetUniformLocation(lightingShader.Program,
-////////                            str.c_str());
-////////                    str = std::string(uniName) + ".specular";
-////////                    pointLightSpecularLoc[i] = glGetUniformLocation(lightingShader.Program,
-////////                            str.c_str());        
-////////                    glUniform3f(pointLightAmbientLoc[i], 0.02f, 0.02f, 0.02f);
-////////                    glUniform3f(pointLightDiffuseLoc[i], 0.4f, 0.4f, 0.4f);
-////////                    glUniform3f(pointLightSpecularLoc[i], 1.0f, 1.0f, 1.0f);
-////////                }
-////////            
-////////                
-////////                GLint spotLightPosLoc = glGetUniformLocation(lightingShader.Program, 
-////////                        "spotLight.position");
-////////                GLint spotLightDirLoc = glGetUniformLocation(lightingShader.Program,
-////////                        "spotLight.direction");
-////////                glUniform3f(spotLightPosLoc, cam.Position.x, cam.Position.y,
-////////                        cam.Position.z );
-////////                glUniform3f(spotLightDirLoc, cam.Front.x, cam.Front.y, cam.Front.z);
-////////                
-////////                GLint spotLightAmbientLoc = glGetUniformLocation(lightingShader.Program,
-////////                        "spotLight.ambient");
-////////                GLint spotLightDiffuseLoc = glGetUniformLocation(lightingShader.Program,
-////////                        "spotLight.diffuse");
-////////                GLint spotLightSpecularLoc = glGetUniformLocation(lightingShader.Program,
-////////                        "spotLight.specular");
-////////				
-////////				GLuint spotLightOn = switch_spotlight();
-////////				GLfloat diffBase = spotLightOn * 0.5f;
-////////				GLfloat specBase = spotLightOn * 1.0f;
-////////
-////////                glUniform3f(spotLightAmbientLoc,  0.0f, 0.0f, 0.0f);
-////////                glUniform3f(spotLightDiffuseLoc, diffBase, diffBase, diffBase);
-////////                glUniform3f(spotLightSpecularLoc, specBase, specBase, specBase);
-////////                
-////////                ///Attenuation on request
-////////                
-////////                ///CutOff
-////////                glUniform1f(glGetUniformLocation(lightingShader.Program, 
-////////                        "spotLight.cutoff"), glm::cos(glm::radians(12.5f)));
-////////                glUniform1f(glGetUniformLocation(lightingShader.Program, 
-////////                        "spotLight.outerCutoff"), glm::cos(glm::radians(14.5f)));
-////////               
+                  //  glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+                ///Dir light
+                GLuint dirLightDirLoc = glGetUniformLocation(lightingShader.Program,
+                        "dirLight.direction");
+                glUniform3f(dirLightDirLoc, 3.0f, -3.0f, -4.0f);
+
+                
+                GLint dirLightAmbientLoc = glGetUniformLocation(lightingShader.Program,
+                        "dirLight.ambient");
+                GLint dirLightDiffuseLoc = glGetUniformLocation(lightingShader.Program,
+                        "dirLight.diffuse");
+                GLint dirLightSpecularLoc = glGetUniformLocation(lightingShader.Program,
+                        "dirLight.specular");        
+                glUniform3f(dirLightAmbientLoc, 0.06f, 0.06f, 0.06f);
+                glUniform3f(dirLightDiffuseLoc, 0.4f, 0.4f, 0.4f);
+                glUniform3f(dirLightSpecularLoc, 1.0f, 1.0f, 1.0f);       
+                       
+                
+                
+                
+                ///Point Lights
+//           
+                int n = 4; /// making dynamic class later 
+                GLuint pointLightPosLoc[4]; 
+                GLint pointLightAmbientLoc[4];
+                GLint pointLightDiffuseLoc[4];
+                GLint pointLightSpecularLoc[4];
+                
+                GLchar uniName[30];
+                
+                for (int i = 0; i < n; i++) {                   
+                    sprintf(uniName,"pointLights[%d]", i); 
+                    std::string str = std::string(uniName) + ".position";
+                    
+                    pointLightPosLoc[i] = glGetUniformLocation(lightingShader.Program,
+                            str.c_str());
+                    glUniform3f(pointLightPosLoc[i], 
+                                pointLightPositions[i].x, 
+                                pointLightPositions[i].y,
+                                pointLightPositions[i].z);
+
+                    //std::cout << str.c_str() << " 1\n";
+                    
+                    str = std::string(uniName) + ".constant";
+                    glUniform1f(glGetUniformLocation(lightingShader.Program, 
+                            str.c_str()), 1.0f);
+                    str = std::string(uniName) + ".linear";
+                    glUniform1f(glGetUniformLocation(lightingShader.Program, 
+                            str.c_str()), 0.09f);
+                    str = std::string(uniName) + ".quadratic";
+                    glUniform1f(glGetUniformLocation(lightingShader.Program, 
+                            str.c_str()), 0.032f);
+                    
+                    str = std::string(uniName) + ".ambient";
+                    pointLightAmbientLoc[i] = glGetUniformLocation(lightingShader.Program,
+                            str.c_str());
+                    str = std::string(uniName) + ".diffuse";
+                    pointLightDiffuseLoc[i] = glGetUniformLocation(lightingShader.Program,
+                            str.c_str());
+                    str = std::string(uniName) + ".specular";
+                    pointLightSpecularLoc[i] = glGetUniformLocation(lightingShader.Program,
+                            str.c_str());        
+                    glUniform3f(pointLightAmbientLoc[i], 0.02f, 0.02f, 0.02f);
+                    glUniform3f(pointLightDiffuseLoc[i], 0.4f, 0.4f, 0.4f);
+                    glUniform3f(pointLightSpecularLoc[i], 1.0f, 1.0f, 1.0f);
+                }
+            
+                
+                GLint spotLightPosLoc = glGetUniformLocation(lightingShader.Program, 
+                        "spotLight.position");
+                GLint spotLightDirLoc = glGetUniformLocation(lightingShader.Program,
+                        "spotLight.direction");
+                glUniform3f(spotLightPosLoc, cam.Position.x, cam.Position.y,
+                        cam.Position.z );
+                glUniform3f(spotLightDirLoc, cam.Front.x, cam.Front.y, cam.Front.z);
+                
+                GLint spotLightAmbientLoc = glGetUniformLocation(lightingShader.Program,
+                        "spotLight.ambient");
+                GLint spotLightDiffuseLoc = glGetUniformLocation(lightingShader.Program,
+                        "spotLight.diffuse");
+                GLint spotLightSpecularLoc = glGetUniformLocation(lightingShader.Program,
+                        "spotLight.specular");
+				
+				GLuint spotLightOn = switch_spotlight();
+				GLfloat diffBase = spotLightOn * 0.5f;
+				GLfloat specBase = spotLightOn * 1.0f;
+
+                glUniform3f(spotLightAmbientLoc,  0.0f, 0.0f, 0.0f);
+                glUniform3f(spotLightDiffuseLoc, diffBase, diffBase, diffBase);
+                glUniform3f(spotLightSpecularLoc, specBase, specBase, specBase);
+                
+                ///Attenuation on request
+                
+                ///CutOff
+                glUniform1f(glGetUniformLocation(lightingShader.Program, 
+                        "spotLight.cutoff"), glm::cos(glm::radians(12.5f)));
+                glUniform1f(glGetUniformLocation(lightingShader.Program, 
+                        "spotLight.outerCutoff"), glm::cos(glm::radians(14.5f)));
+               
                 
                 
                 
@@ -289,68 +297,42 @@ int main() {
                 nano.Draw(lightingShader);
                 
                 
+                
+                model = glm::mat4(); 
+                model = glm::translate(model, glm::vec3(1.5, 1.83f, -2.97f));
+                model = glm::scale(model, glm::vec3(0.05f, 0.05f, 0.05f));
+                glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+                mask.Draw(lightingShader);
+                
+                
+                model = glm::mat4(); 
+                model = glm::translate(model, glm::vec3(1.5, -1.0f, 3.0f));
+                model = glm::rotate(model, glm::radians(180.0f), 
+                        glm::vec3(0.0f, 1.0f, 0.0f));
+                model = glm::scale(model, glm::vec3(0.9f, 0.9f, 0.9f));
+                glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+                st.Draw(lightingShader);
+                
                 //boxSurface.activate(1, GL_TEXTURE0, 0, lightingShader.Program);
                 
                 
                 
                 
                 
-                
-                GLfloat xc = 0 + (sin(currentFrame* 0.8f)) * 180;
-                
-                model = glm::mat4();
-                //model = glm::scale(model, glm::vec3(1.0f, 1.0f, xc+1) );
-                
-                model = glm::translate(model, glm::vec3(0.0f, 0.0f, -4.0f));
-                
-                model = glm::rotate(model, glm::radians(xc), glm::vec3(0.5f, 0.5f,0.0f));
-                //model = glm::scale(model, glm::vec3(1.0f, 0.0f, 0.5f) );
-                glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-                boxFrame.draw(0);
-                
-                model = glm::mat4();
-                //model = glm::scale(model, glm::vec3(1.0f, 1.0f, xc+1) );
-                
-                model = glm::translate(model, glm::vec3(-1.0f, 2.0f, -8.0f));
-                
-                model = glm::rotate(model, glm::radians(xc), glm::vec3(0.5f, 0.5f,0.0f));
-                //model = glm::scale(model, glm::vec3(1.0f, 0.0f, 0.5f) );
-                glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-                boxFrame.draw(0);
-                
-                
-                
-                boxSurface.activate(1, GL_TEXTURE0, 0, lightingShader.Program);
-                boxSurface.activate(4, GL_TEXTURE1, 1, lightingShader.Program);
-                
-                 model = glm::mat4();
-                //model = glm::scale(model, glm::vec3(1.0f, 1.0f, xc+1) );
-                
-                model = glm::translate(model, glm::vec3(3.0f, -1.0f, -1.0f));
-                
-                //model = glm::rotate(model, xc, glm::vec3(0.5f, 0.5f,0.0f));
-                //model = glm::scale(model, glm::vec3(1.0f, 0.0f, 0.5f) );
-                glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-                boxFrame.draw(0);
-                
-                
-		
-                
-                
                 boxSurface.activate(2, GL_TEXTURE0, 0, lightingShader.Program);
               
                     
                 model = glm::mat4();
-                model = glm::translate(model, glm::vec3(3.0f, -1.501f, -2.0f));
+                model = glm::translate(model, glm::vec3(3.0f, -1.01f, -2.0f));
                 model = glm::scale(model, glm::vec3(10.0f, 0.01f, 10.0f) );
                 glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
                 boxFrame.draw(2);
 		           
                 
 //               
-//                lightPos.x = ((sin(currentFrame))) *10 +1;   
-//                lightPos.y = ((sin(currentFrame))) + 0.5;
-//                lightPos.z = ((cos(currentFrame))) *2 -3;
+                lightPos.x = ((sin(currentFrame))) *10 +1;   
+                lightPos.y = ((sin(currentFrame))) + 0.5;
+                lightPos.z = ((cos(currentFrame))) *2 -3;
                 
                 lampShader.Use();
                 
@@ -365,6 +347,7 @@ int main() {
 
                for (int i = 0; i < 4; i++) {
                 model = glm::mat4();
+                
                 model = glm::translate(model, pointLightPositions[i]);
                 model = glm::scale(model, glm::vec3(0.2f));
                 glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));

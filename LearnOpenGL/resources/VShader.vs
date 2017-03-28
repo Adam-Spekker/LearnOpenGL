@@ -13,7 +13,7 @@
   void main() {
     	gl_Position = projection * view * model * vec4(position, 1.0f);
     	//ourColor = color;
-	TexCoords = vec2(texCoords.x,1- texCoords.y);
+	TexCoords = texCoords;///vec2(texCoords.x,1- texCoords.y);
 
 	FragPos = vec3(model * vec4(position, 1.0f));
 	Normal = mat3(transpose(inverse(model))) * normal;

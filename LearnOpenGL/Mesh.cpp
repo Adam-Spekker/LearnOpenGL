@@ -76,6 +76,7 @@ void Mesh::Draw(Shader shader) {
         string number;
         TexType type = textures[i].type;
         string name = this->textures[i].typetxt[type];
+        //std::cout << name << std::endl;
         
         if(type == DIFFUSE)  /// swap later for enum
             ss << diffuseNr++;
@@ -83,11 +84,13 @@ void Mesh::Draw(Shader shader) {
             ss << specularNr++;
         number = ss.str();
         
+        //std::cout << ("material." + name + number).c_str() << std::endl;
+        
         glUniform1f(glGetUniformLocation(shader.Program, ("material." +
                 name + number).c_str()), i);
         glBindTexture(GL_TEXTURE_2D, this->textures[i].id);
 
-		std::cout << "test1" << std::endl;
+		//std::cout << "test1" << std::endl;
 
     }
     

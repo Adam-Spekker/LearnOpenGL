@@ -49,9 +49,9 @@ void Model::processNode(aiNode* node, const aiScene* scene) {
             //std::cout << node->mNumMeshes << std::endl;
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
                 
-                Mesh mesha(this->processMesh(mesh, scene));
-               std::cout << mesha.textures[0].id << std::endl;
-		this->meshes.push_back(mesha);
+                
+              // std::cout << mesha.textures[0].id << std::endl;
+		this->meshes.push_back(Mesh(this->processMesh(mesh, scene)));
                // std::cout << this->meshes[i].textures[0].id << std::endl;
                
 	}

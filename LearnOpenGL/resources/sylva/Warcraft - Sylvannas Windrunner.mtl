@@ -1,0 +1,26 @@
+# Blender MTL File: 'Warcraft - Sylvannas Windrunner.blend'
+# Material Count: 2
+
+newmtl Sylvanas_Skin
+Ns 66.666667
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 2.000000 2.000000 2.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd textures/Sylvannas_body_diffuse.tga
+map_Bump textures/Sylvannas_body_normal.tga
+map_Ks textures/Sylvannas_body_specular.tga
+
+newmtl Sylvannas_Base
+Ns 66.666667
+Ka 0.000000 0.000000 0.000000
+Kd 0.812169 0.812169 0.812169
+Ks 2.000000 2.000000 2.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd textures/storm_hero_sylvanas_base_diff.tga
+map_Bump textures/storm_hero_sylvanas_base_norm.tga
+map_Ks textures/storm_hero_sylvanas_base_spec.tga

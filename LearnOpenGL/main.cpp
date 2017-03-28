@@ -12,63 +12,11 @@
   
  // Camera cam(0,0,0, 0,1,0,0,0);
   Camera cam;
-GLfloat boxVertices[] = {
-    // Positions           // Normals           // Texture Coords
-    -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
-     0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 0.0f,
-     0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
-     0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
-    -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
 
-    -0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   0.0f, 0.0f,
-     0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   1.0f, 0.0f,
-     0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   1.0f, 1.0f,
-     0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   1.0f, 1.0f,
-    -0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   0.0f, 1.0f,
-    -0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   0.0f, 0.0f,
-
-    -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
-    -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
-    -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 0.0f,
-    -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
-
-     0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
-     0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f,
-     0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
-     0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
-     0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 0.0f,
-     0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
-
-    -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 1.0f,
-     0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 1.0f,
-     0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 0.0f,
-     0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 0.0f,
-    -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 0.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 1.0f,
-
-    -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f,
-     0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 1.0f,
-     0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 0.0f,
-     0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 0.0f,
-    -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 0.0f,
-    -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
-};
-GLfloat plainVertices[] = {
-	
-	1.0f, 0.0f,-1.0f,  0.0f, 1.0f, 0.0f,
-	1.0f, 0.0f, 1.0f,  0.0f, 1.0f, 0.0f,
-       -1.0f, 0.0f,-1.0f,  0.0f, 1.0f, 0.0f,
-       -1.0f, 0.0f,-1.0f,  0.0f, 1.0f, 0.0f,
-       -1.0f, 0.0f, 1.0f,  0.0f, 1.0f, 0.0f,
-	1.0f, 0.0f, 1.0f,  0.0f, 1.0f, 0.0f
-};
 
 glm::vec3 pointLightPositions[] = {
         glm::vec3( 0.7f, 0.2f, 2.0f),
-        glm::vec3( 2.3f, -3.3f, -4.0f),
+        glm::vec3( 2.3f, -1.3f, -4.0f),
         glm::vec3(-4.0f, 2.0f, -12.0f),
         glm::vec3( 0.0f, 0.0f, -3.0f)
 };
@@ -108,25 +56,14 @@ int main() {
 	//glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	
 
-	Frame boxFrame(3);
-	boxFrame.setup(0, sizeof(boxVertices), 8, boxVertices);
-        boxFrame.setup(1, sizeof(boxVertices), 8, boxVertices);
-        boxFrame.setup(2, sizeof(boxVertices), 8, boxVertices);
-        
-        Frame lampFrame(3);
-        lampFrame.setup(0, sizeof(boxVertices), 8, boxVertices);
 
-	Surface boxSurface(5);	
-	boxSurface.setup(0, "./resources/container2.png");
-	boxSurface.setup(1, "./resources/wall2.png");
-        boxSurface.setup(2, "./resources/bricks1.png");
-        boxSurface.setup(3, "./resources/container2_specular.png");
-        boxSurface.setup(4, "./resources/blank_specular.png");
         
         Model nano("./resources/nano/nanosuit.obj");
         Model maya("./resources/maya/maya.obj");
         Model mask("./resources/mask/VMask.obj");
         Model st("./resources/st/Stormtrooper.obj");
+
+		Model sphere("./resources/sphere.obj");
         
        // std::cout <<"tina";
        // Model tina("./resources/tina/tina.obj");
@@ -139,7 +76,7 @@ int main() {
 	///main loop
 	while(!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
-                pointLightPositions[0] =  glm::vec3(lightPos.x, lightPos.y, lightPos.z);
+                pointLightPositions[0] =  glm::vec3(lightPos.x, lightPos.y+2, lightPos.z);
 		
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -200,7 +137,7 @@ int main() {
                 GLint dirLightSpecularLoc = glGetUniformLocation(lightingShader.Program,
                         "dirLight.specular");        
                 glUniform3f(dirLightAmbientLoc, 0.06f, 0.06f, 0.06f);
-                glUniform3f(dirLightDiffuseLoc, 0.4f, 0.4f, 0.4f);
+                glUniform3f(dirLightDiffuseLoc, 0.2f, 0.2f, 0.2f);
                 glUniform3f(dirLightSpecularLoc, 1.0f, 1.0f, 1.0f);       
                        
                 
@@ -234,10 +171,10 @@ int main() {
                             str.c_str()), 1.0f);
                     str = std::string(uniName) + ".linear";
                     glUniform1f(glGetUniformLocation(lightingShader.Program, 
-                            str.c_str()), 0.09f);
+                            str.c_str()), 0.08f);
                     str = std::string(uniName) + ".quadratic";
                     glUniform1f(glGetUniformLocation(lightingShader.Program, 
-                            str.c_str()), 0.032f);
+                            str.c_str()), 0.022f);
                     
                     str = std::string(uniName) + ".ambient";
                     pointLightAmbientLoc[i] = glGetUniformLocation(lightingShader.Program,
@@ -249,7 +186,7 @@ int main() {
                     pointLightSpecularLoc[i] = glGetUniformLocation(lightingShader.Program,
                             str.c_str());        
                     glUniform3f(pointLightAmbientLoc[i], 0.02f, 0.02f, 0.02f);
-                    glUniform3f(pointLightDiffuseLoc[i], 0.4f, 0.4f, 0.4f);
+                    glUniform3f(pointLightDiffuseLoc[i], 0.5f, 0.5f, 0.5f);
                     glUniform3f(pointLightSpecularLoc[i], 1.0f, 1.0f, 1.0f);
                 }
             
@@ -288,7 +225,7 @@ int main() {
                 
                 
                 
-		model = glm::mat4();
+			model = glm::mat4();
                 model = glm::translate(model, glm::vec3(1.5f, -1.0f, -3.0f));
                 model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
                 glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -313,28 +250,25 @@ int main() {
                 glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
                 st.Draw(lightingShader);
                 
-                //boxSurface.activate(1, GL_TEXTURE0, 0, lightingShader.Program);
+                
+				
+				
                 
                 
+				
                 
                 
-                
-                boxSurface.activate(2, GL_TEXTURE0, 0, lightingShader.Program);
               
-                    
-                model = glm::mat4();
-                model = glm::translate(model, glm::vec3(3.0f, -1.01f, -2.0f));
-                model = glm::scale(model, glm::vec3(10.0f, 0.01f, 10.0f) );
-                glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-                boxFrame.draw(2);
 		           
                 
-//               
+         
                 lightPos.x = ((sin(currentFrame))) *10 +1;   
                 lightPos.y = ((sin(currentFrame))) + 0.5;
                 lightPos.z = ((cos(currentFrame))) *2 -3;
                 
                 lampShader.Use();
+
+				
                 
 		modelLoc = glGetUniformLocation(lampShader.Program, "model");
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -345,14 +279,24 @@ int main() {
 		projectionLoc = glGetUniformLocation(lampShader.Program, "projection");
 		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
+
+				model = glm::mat4();
+				model = glm::translate(model, glm::vec3(0.5, -1.0f, 0.0f));
+				model = glm::scale(model, glm::vec3(10.9f, 0.01f, 10.9f));
+				glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+				sphere.Draw(lampShader);
+
+
+
+
                for (int i = 0; i < 4; i++) {
-                model = glm::mat4();
+					model = glm::mat4();
                 
-                model = glm::translate(model, pointLightPositions[i]);
-                model = glm::scale(model, glm::vec3(0.2f));
-                glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+					model = glm::translate(model, pointLightPositions[i]);
+					model = glm::scale(model, glm::vec3(0.2f));
+					glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
                 
-                lampFrame.draw(0);
+					sphere.Draw(lampShader);
                }
                 
 

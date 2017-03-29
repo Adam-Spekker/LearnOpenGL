@@ -6,6 +6,7 @@
                    projectFiles="true">
       <itemPath>Camera.h</itemPath>
       <itemPath>Frame.h</itemPath>
+      <itemPath>Light.h</itemPath>
       <itemPath>Mesh.h</itemPath>
       <itemPath>Model.h</itemPath>
       <itemPath>Shader.h</itemPath>
@@ -22,6 +23,7 @@
                    projectFiles="true">
       <itemPath>Camera.cpp</itemPath>
       <itemPath>Frame.cpp</itemPath>
+      <itemPath>Light.cpp</itemPath>
       <itemPath>Mesh.cpp</itemPath>
       <itemPath>Model.cpp</itemPath>
       <itemPath>Shader.cpp</itemPath>
@@ -67,6 +69,10 @@
       <item path="Frame.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Frame.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Light.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Light.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Mesh.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -118,6 +124,10 @@
       <item path="Frame.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Frame.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Light.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Light.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Mesh.cpp" ex="false" tool="1" flavor2="0">
       </item>

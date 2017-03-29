@@ -5,6 +5,7 @@
 #include "Surface.h"
 #include "Camera.h"
 #include "Model.h"
+#include "Light.h"
 
 ///global variables
 const GLuint WIDTH = 1600;

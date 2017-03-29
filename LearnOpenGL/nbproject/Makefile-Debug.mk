@@ -37,6 +37,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/Camera.o \
 	${OBJECTDIR}/Frame.o \
+	${OBJECTDIR}/Light.o \
 	${OBJECTDIR}/Mesh.o \
 	${OBJECTDIR}/Model.o \
 	${OBJECTDIR}/Shader.o \
@@ -77,6 +78,11 @@ ${OBJECTDIR}/Frame.o: Frame.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g `pkg-config --cflags assimp` `pkg-config --cflags glew` `pkg-config --cflags glfw3` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Frame.o Frame.cpp
+
+${OBJECTDIR}/Light.o: Light.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g `pkg-config --cflags assimp` `pkg-config --cflags glew` `pkg-config --cflags glfw3` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Light.o Light.cpp
 
 ${OBJECTDIR}/Mesh.o: Mesh.cpp
 	${MKDIR} -p ${OBJECTDIR}

@@ -13,21 +13,23 @@
 
 #include "Light.h"
 
+
+
 void DirLight::setup(Shader shader) {
     GLuint dirLightDirLoc = glGetUniformLocation(shader.Program, 
              "dirLight.direction");
     glUniform3f(dirLightDirLoc, Direction.x, Direction.y, Direction.z);
      
-    GLint dirLightAmbientLoc = glGetUniformLocation(lightingShader.Program,
+    GLint dirLightAmbientLoc = glGetUniformLocation(shader.Program,
             "dirLight.ambient");
-    GLint dirLightDiffuseLoc = glGetUniformLocation(lightingShader.Program,
+    GLint dirLightDiffuseLoc = glGetUniformLocation(shader.Program,
             "dirLight.diffuse");
-    GLint dirLightSpecularLoc = glGetUniformLocation(lightingShader.Program,
+    GLint dirLightSpecularLoc = glGetUniformLocation(shader.Program,
             "dirLight.specular"); 
     
-    glm::vec3& ambient = this->getAmbient();
-    glm::vec3& diff = this->getDiffuse();
-    glm::vec3& spec = this->getSpecular();
+    glm::vec3 ambient = this->getAmbient();
+    glm::vec3 diff = this->getDiffuse();
+    glm::vec3 spec = this->getSpecular();
     
     glUniform3f(dirLightAmbientLoc, ambient.x, ambient.y, ambient.z);
     glUniform3f(dirLightDiffuseLoc, diff.x, diff.y, diff.z);
@@ -69,9 +71,9 @@ void PointLight::setup(Shader shader) {
         str = std::string(uniName) + ".specular";
         pointLightSpecularLoc = glGetUniformLocation(shader.Program, str.c_str());        
         
-        glm::vec3& ambient = this->getAmbient();
-        glm::vec3& diff = this->getDiffuse();
-        glm::vec3& spec = this->getSpecular();
+        glm::vec3 ambient = this->getAmbient();
+        glm::vec3 diff = this->getDiffuse();
+        glm::vec3 spec = this->getSpecular();
 
         glUniform3f(pointLightAmbientLoc, ambient.x, ambient.y, ambient.z);
         glUniform3f(pointLightDiffuseLoc, diff.x, diff.y, diff.z);

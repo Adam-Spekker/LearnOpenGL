@@ -15,8 +15,10 @@
 #define LIGHT_H
 
 #include "top_header.h"
+#include "Shader.h"
 
 enum LightType {DIR =0, POINT = 1, SPOT = 2};
+
 
 class Light {
     glm::vec3 Ambient;
@@ -38,36 +40,36 @@ public:
     
     virtual void setup(Shader shader);
     
-    virtual void move(glm::vec3);
+   // virtual void move(glm::vec3);
             
-    virtual ~Light();
+    virtual ~Light() {}
 
 };
 
 class DirLight : public Light {
     glm::vec3 Direction;
-    static GLuint sum = 0;
+    static GLuint sum;
+    
     GLuint id; 
 public:
-    DirLight(glm::vec3 ambient = glm::vec3(0.1f, 0.1f, 0.1f),
-                glm::vec3 diffuse = glm::vec3(0.5f, 0.5f, 0.5f),
-                    glm::vec3 specular = glm::vec3(1.0f, 1.0f, 1.0f),
-                        glm::vec3 dir = glm::vec3(1.0f, 1.0f, 1.0f)) : 
-                            Light(ambient, diffuse, specular), Direction(dir) {
-                                id = sum; 
-                                sum++;
+    DirLight(glm::vec3 dir = glm::vec3(1.0f, 1.0f, 1.0f),
+                glm::vec3 ambient = glm::vec3(0.1f, 0.1f, 0.1f),
+                    glm::vec3 diffuse = glm::vec3(0.5f, 0.5f, 0.5f),
+                        glm::vec3 specular = glm::vec3(1.0f, 1.0f, 1.0f)) : 
+                            Direction(dir),Light(ambient, diffuse, specular) {
+                                
+                                  id = sum; 
+                                  sum++;                                 
                             } 
                         
     
-    DirLight(glm::vec3 dir) : Light(), Direction(dir) {
-         id = sum; 
-         sum++;
-    }
+    
  
     void setDir(glm::vec3 dir) { Direction = dir;}
     glm::vec3 getDir() {return Direction;}
     
     void setup(Shader shader);
+    ~DirLight() {}
         
 };
 
@@ -75,7 +77,7 @@ class PointLight : public Light {
     glm::vec3 Position;    
     glm::vec3 Fade;
     
-    static GLuint sum = 0;
+    static GLuint sum ;
     GLuint id; 
     
 public: 
@@ -85,7 +87,7 @@ public:
                         glm::vec3 pos = glm::vec3(1.0f, 1.0f, 1.0f),
                             glm::vec3 fade = glm::vec3(1.0f, 0.09f, 0.032f)) : 
                                 Light(ambient, diffuse, specular), 
-                                    Position(pos), fade(fade) {
+                                    Position(pos), Fade(fade) {
                                         id = sum; 
                                         sum++;
                                 }
@@ -99,6 +101,7 @@ public:
     glm::vec3 getFade() { return Fade; }
     
     void setup(Shader shader);
+     ~PointLight() {}
 };
 
 class SpotLight : public Light {
@@ -110,6 +113,8 @@ class SpotLight : public Light {
 public:
     //SpotLight();
     void setup(Shader shader);
+    
+     ~SpotLight() {}
 };
 
 

@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Camera.o \
 	${OBJECTDIR}/Frame.o \
 	${OBJECTDIR}/Light.o \
+	${OBJECTDIR}/LightRail.o \
 	${OBJECTDIR}/Mesh.o \
 	${OBJECTDIR}/Model.o \
 	${OBJECTDIR}/Shader.o \
@@ -83,6 +84,11 @@ ${OBJECTDIR}/Light.o: Light.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Light.o Light.cpp
+
+${OBJECTDIR}/LightRail.o: LightRail.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/LightRail.o LightRail.cpp
 
 ${OBJECTDIR}/Mesh.o: Mesh.cpp
 	${MKDIR} -p ${OBJECTDIR}

@@ -14,68 +14,66 @@
 #include "Light.h"
 
 
+void Light::setUni(Shader shader) {
+    GLchar tmp[32];
+    
+    snprintf(tmp, sizeof tmp, "%s.ambient", name );
+    GLint lightAmbientLoc = glGetUniformLocation(shader.Program, tmp);
+    snprintf(tmp, sizeof tmp, "%s.diffuse", name );
+    GLint lightDiffuseLoc = glGetUniformLocation(shader.Program, tmp);
+    snprintf(tmp, sizeof tmp, "%s.specular", name );
+    GLint lightSpecularLoc = glGetUniformLocation(shader.Program, tmp); 
+    
+    glUniform3f(lightAmbientLoc, Ambient.x, Ambient.y, Ambient.z);
+    glUniform3f(lightDiffuseLoc, Diffuse.x, Diffuse.y, Diffuse.z);
+    glUniform3f(lightSpecularLoc, Specular.x, Specular.y, Specular.z);       
+}
 
-void DirLight::setup(Shader shader) {
-    GLuint dirLightDirLoc = glGetUniformLocation(shader.Program, 
-             "dirLight.direction");
+void DirLight::setUni(Shader shader) {
+    
+    Light::setUni(shader);
+    
+    GLchar tmp[32];
+    
+    snprintf(tmp, sizeof tmp, "%s.direction", name );
+    GLuint dirLightDirLoc = glGetUniformLocation(shader.Program, tmp);
     glUniform3f(dirLightDirLoc, Direction.x, Direction.y, Direction.z);
-     
-    GLint dirLightAmbientLoc = glGetUniformLocation(shader.Program,
-            "dirLight.ambient");
-    GLint dirLightDiffuseLoc = glGetUniformLocation(shader.Program,
-            "dirLight.diffuse");
-    GLint dirLightSpecularLoc = glGetUniformLocation(shader.Program,
-            "dirLight.specular"); 
-    
-    glm::vec3 ambient = this->getAmbient();
-    glm::vec3 diff = this->getDiffuse();
-    glm::vec3 spec = this->getSpecular();
-    
-    glUniform3f(dirLightAmbientLoc, ambient.x, ambient.y, ambient.z);
-    glUniform3f(dirLightDiffuseLoc, diff.x, diff.y, diff.z);
-    glUniform3f(dirLightSpecularLoc, spec.x, spec.y, spec.z);       
                        
 }
 
-void PointLight::setup(Shader shader) {
+void PointLight::setUni(Shader shader) {
+    
+    Light::setUni(shader);
+    
+    GLchar tmp[32];
+    
+    GLuint pointLightPosLoc = glGetUniformLocation(shader.Program, tmp);
+    glUniform3f(pointLightPosLoc, Position.x, Position.y, Position.z);
+
+    ///Fade x,y,z coordinates respectively : constant, linear, quadratic 
+
+    GLuint pointLightFadeLoc = glGetUniformLocation(shader.Program,
+            strcat(name, ".position"));
+    glUniform3f(pointLightFadeLoc, Fade.x, Fade.y, Fade.z);
+
+}
+
+void SpotLight::setUni(Shader shader) {
+    
+    Light::setUni(shader);
+    
+    GLchar tmp[32];
+    
+    snprintf(tmp, sizeof tmp, "%s.direction", name );
+    GLuint spotLightDirLoc = glGetUniformLocation(shader.Program, tmp);
+    snprintf(tmp, sizeof tmp, "%s.position", name );
+    GLuint spotLightPosLoc = glGetUniformLocation(shader.Program, tmp);
+    snprintf(tmp, sizeof tmp, "%s.cutOff", name );
+    GLuint spotLightCutOffLoc = glGetUniformLocation(shader.Program, tmp);
     
     
-    GLuint pointLightPosLoc; 
-    GLuint pointLightAmbientLoc;
-    GLuint pointLightDiffuseLoc;
-    GLuint pointLightSpecularLoc;
-                
-        GLchar uniName[30];
-                
-        sprintf(uniName,"pointLights[%d]", id); 
-               
-        std::string str = std::string(uniName) + ".position";
-
-        pointLightPosLoc = glGetUniformLocation(shader.Program, str.c_str());
-        glUniform3f(pointLightPosLoc, Position.x, Position.y, Position.z);
-
-        //std::cout << str.c_str() << " 1\n";
-
-        str = std::string(uniName) + ".constant";
-        glUniform1f(glGetUniformLocation(shader.Program, str.c_str()), Fade.x);
-        str = std::string(uniName) + ".linear";
-        glUniform1f(glGetUniformLocation(shader.Program, str.c_str()), Fade.y);
-        str = std::string(uniName) + ".quadratic";
-        glUniform1f(glGetUniformLocation(shader.Program, str.c_str()), Fade.z);
-
-        
-        str = std::string(uniName) + ".ambient";
-        pointLightAmbientLoc = glGetUniformLocation(shader.Program, str.c_str());
-        str = std::string(uniName) + ".diffuse";
-        pointLightDiffuseLoc = glGetUniformLocation(shader.Program, str.c_str());
-        str = std::string(uniName) + ".specular";
-        pointLightSpecularLoc = glGetUniformLocation(shader.Program, str.c_str());        
-        
-        glm::vec3 ambient = this->getAmbient();
-        glm::vec3 diff = this->getDiffuse();
-        glm::vec3 spec = this->getSpecular();
-
-        glUniform3f(pointLightAmbientLoc, ambient.x, ambient.y, ambient.z);
-        glUniform3f(pointLightDiffuseLoc, diff.x, diff.y, diff.z);
-        glUniform3f(pointLightSpecularLoc, spec.x, spec.y, spec.z);       
+    glUniform3f(spotLightDirLoc, Direction.x, Direction.y, Direction.z);
+    glUniform3f(spotLightDirLoc, Position.x, Position.y, Position.z);
+    glUniform2f(spotLightCutOffLoc, CutOff, OuterCutOff);
+                       
 }

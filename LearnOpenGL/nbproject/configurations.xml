@@ -7,6 +7,7 @@
       <itemPath>Camera.h</itemPath>
       <itemPath>Frame.h</itemPath>
       <itemPath>Light.h</itemPath>
+      <itemPath>LightRail.h</itemPath>
       <itemPath>Mesh.h</itemPath>
       <itemPath>Model.h</itemPath>
       <itemPath>Shader.h</itemPath>
@@ -17,6 +18,12 @@
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true">
+      <itemPath>resources/Shader.frag</itemPath>
+      <itemPath>resources/Shader.vs</itemPath>
+      <itemPath>resources/Shaderold.vs</itemPath>
+      <itemPath>resources/lampShader.frag</itemPath>
+      <itemPath>resources/targetShader.frag</itemPath>
+      <itemPath>resources/targetShaderUniLight.frag</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -24,6 +31,7 @@
       <itemPath>Camera.cpp</itemPath>
       <itemPath>Frame.cpp</itemPath>
       <itemPath>Light.cpp</itemPath>
+      <itemPath>LightRail.cpp</itemPath>
       <itemPath>Mesh.cpp</itemPath>
       <itemPath>Model.cpp</itemPath>
       <itemPath>Shader.cpp</itemPath>
@@ -74,6 +82,10 @@
       </item>
       <item path="Light.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="LightRail.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="LightRail.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Mesh.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Mesh.h" ex="false" tool="3" flavor2="0">
@@ -93,6 +105,21 @@
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="main.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/Shader.frag" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/Shader.vs" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/Shaderold.vs" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/lampShader.frag" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/targetShader.frag" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/targetShaderUniLight.frag"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="top_header.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -129,6 +156,10 @@
       </item>
       <item path="Light.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="LightRail.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="LightRail.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Mesh.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Mesh.h" ex="false" tool="3" flavor2="0">
@@ -148,6 +179,21 @@
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="main.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/Shader.frag" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/Shader.vs" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/Shaderold.vs" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/lampShader.frag" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/targetShader.frag" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/targetShaderUniLight.frag"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="top_header.h" ex="false" tool="3" flavor2="0">
       </item>
